@@ -1,0 +1,32 @@
+{
+  "kind": "singleType",
+  "collectionName": "amigurumis",
+  "info": {
+    "singularName": "amigurumi",
+    "pluralName": "amigurumis",
+    "displayName": "Amigurumi",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Text": {
+      "type": "text"
+    },
+    "Title": {
+      "type": "string"
+    },
+    "Photo": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

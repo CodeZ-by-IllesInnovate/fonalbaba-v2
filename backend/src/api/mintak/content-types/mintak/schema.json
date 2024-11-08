@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "mintaks",
+  "info": {
+    "singularName": "mintak",
+    "pluralName": "mintaks",
+    "displayName": "Minták",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "leiras": {
+      "type": "richtext"
+    },
+    "bovebben": {
+      "type": "richtext",
+      "required": true
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true,
+      "required": true
+    }
+  }
+}

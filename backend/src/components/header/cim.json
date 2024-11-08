@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_header_cim_s",
+  "info": {
+    "displayName": "Cím "
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    }
+  }
+}

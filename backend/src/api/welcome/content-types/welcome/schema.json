@@ -1,0 +1,52 @@
+{
+  "kind": "singleType",
+  "collectionName": "welcomes",
+  "info": {
+    "singularName": "welcome",
+    "pluralName": "welcomes",
+    "displayName": "Welcome",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "header": {
+      "type": "string"
+    },
+    "paragraph_1": {
+      "type": "string"
+    },
+    "paragraph_2": {
+      "type": "string"
+    },
+    "question_1": {
+      "type": "string"
+    },
+    "paragraph_3": {
+      "type": "string"
+    },
+    "question_2": {
+      "type": "string"
+    },
+    "paragraph_4": {
+      "type": "string"
+    },
+    "paragraph_5": {
+      "type": "string"
+    },
+    "paragraph_6": {
+      "type": "string"
+    },
+    "greetingPrefix": {
+      "type": "string"
+    },
+    "highlightedText": {
+      "type": "string"
+    },
+    "greetingSuffix": {
+      "type": "string"
+    }
+  }
+}
