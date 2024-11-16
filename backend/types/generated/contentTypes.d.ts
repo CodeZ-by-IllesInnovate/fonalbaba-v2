@@ -400,6 +400,38 @@ export interface ApiAmigurumiAmigurumi extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiBemutatkozasBemutatkozas extends Struct.SingleTypeSchema {
+  collectionName: 'bemutatkozasok';
+  info: {
+    displayName: 'Bemutatkozas';
+    pluralName: 'bemutatkozasok';
+    singularName: 'bemutatkozas';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    body: Schema.Attribute.RichText;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email;
+    facebookLink: Schema.Attribute.String;
+    intro: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::bemutatkozas.bemutatkozas'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiHeroHero extends Struct.CollectionTypeSchema {
   collectionName: 'heroes';
   info: {
@@ -1050,6 +1082,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::amigurumi.amigurumi': ApiAmigurumiAmigurumi;
+      'api::bemutatkozas.bemutatkozas': ApiBemutatkozasBemutatkozas;
       'api::hero.hero': ApiHeroHero;
       'api::mintak.mintak': ApiMintakMintak;
       'api::navitem.navitem': ApiNavitemNavitem;

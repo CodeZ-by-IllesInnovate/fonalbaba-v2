@@ -1,13 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
-import Link from "next/link";
 
-export default function Navbar() {
+const Navbar = () => {
   const [menuItems, setMenuItems] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleMobileDrawer = () => setMobileDrawerOpen(!mobileDrawerOpen);
 
   useEffect(() => {
     const fetchNavItems = async () => {
@@ -27,86 +27,86 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="relative h-screen bg-cover bg-center">
-      <nav className="border-gray-200 z-10 relative bg-opacity-70 backdrop-brightness-75">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a
-            href="/"
-            className="flex items-center space-x-3 rtl:space-x-reverse"
-          >
+    <nav className="sticky top-0 z-50 py-3 backdrop-blur-lg border-b border-neutral-700/80 bg-nav_bg">
+      <div className="container px-4 mx-auto relative text-sm">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center flex-shrink-0">
             <img
               src={`${process.env.NEXT_PUBLIC_UPLOADS_URL}/bg_remove_logo_1830fa5c96.png`}
-              className="h-24"
-              alt="Fonalbaba"
+              alt=""
+              className="h-16 w-16 mr-2"
             />
-          </a>
-          <button
-            type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-muted rounded-lg md:hidden"
-            onClick={toggleMenu}
-            aria-controls="navbar-default"
-            aria-expanded={isOpen}
-          >
-            <span className="sr-only">Open main menu</span>
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
+            <span className="text-xl tracking-tight font-bold">Fonalbaba</span>
+          </div>
+          <ul className="hidden lg:flex ml-14 space-x-12">
+            {menuItems
+              .sort((a, b) => a.Sorszam - b.Sorszam)
+              .map((item) => (
+                <li key={item.Sorszam}>
+                  <a
+                    href={item.URL}
+                    className="block py-2 px-3 text-black rounded-md font-bold transition duration-300 group hover:text-muted"
+                  >
+                    {item.Label}
+                  </a>
+                </li>
+              ))}
+          </ul>
+          <div className="hidden lg:flex justify-center space-x-12 items-center">
+            <a
+              href="/kapcsolat"
+              className="bg-gradient-to-r from-primary to-secondary py-2 px-3 rounded-md font-bold border-2 border-primary transition duration-300 group hover:shadow-lg"
             >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
-          </button>
+              Kapcsolatfelvétel
+            </a>
+          </div>
+          <div className="lg:hidden md:flex flex-col justify-end">
+            <button onClick={toggleMobileDrawer}>
+              {mobileDrawerOpen ? <X /> : <Menu />}
+            </button>
+          </div>
+        </div>
 
-          {/* Mobile Menu */}
+        {mobileDrawerOpen && (
           <motion.div
-            className={`${isOpen ? "block" : "hidden"} w-full md:hidden`}
             id="navbar-default"
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: isOpen ? 1 : 0, height: isOpen ? "auto" : 0 }}
+            animate={{
+              opacity: mobileDrawerOpen ? 1 : 0,
+              height: mobileDrawerOpen ? "auto" : 0,
+            }}
             transition={{ duration: 0.3 }}
+            className={`${
+              mobileDrawerOpen ? "fixed" : "hidden"
+            }  right-0 z-20 backdrop-blur-lg border-b bg-background  w-full p-12 flex flex-col justify-center items-center lg:hidden`}
           >
-            <ul className="font-medium flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-accent ">
+            <ul className="text-center">
               {menuItems
                 .sort((a, b) => a.Sorszam - b.Sorszam)
                 .map((item) => (
-                  <li key={item.Sorszam}>
+                  <li key={item.Sorszam} className="py-4">
                     <a
                       href={item.URL}
-                      className="block py-2 px-3 text-black rounded"
+                      className="block text-lg font-semibold text-neutral-800 py-2 px-4 rounded-md transition duration-300 ease-in-out hover:bg-primary hover:text-white"
                     >
                       {item.Label}
                     </a>
                   </li>
                 ))}
             </ul>
+            <div className="flex space-x-6">
+              <a
+                href="/kapcsolat"
+                className="bg-gradient-to-r from-primary to-secondary py-2 px-3 rounded-md"
+              >
+                Kapcsolatfelvétel
+              </a>
+            </div>
           </motion.div>
-
-          {/* Desktop Menu */}
-          <div className="hidden w-full md:block md:w-auto">
-            <ul className="font-medium flex flex-row space-x-8 md:mt-0 md:border-0">
-              {menuItems.map((item) => (
-                <li key={item.Sorszam}>
-                  <Link
-                    href={item.URL}
-                    className="relative inline-block py-2 px-3 text-white font-bold transition duration-300 group hover:text-muted"
-                  >
-                    {item.Label}
-                    <span className="absolute left-1/2 bottom-0 h-0.5 w-full bg-muted transform -translate-x-1/2 scale-x-0 transition-transform duration-300 origin-center group-hover:scale-x-100"></span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
+        )}
+      </div>
+    </nav>
   );
-}
+};
+
+export default Navbar;

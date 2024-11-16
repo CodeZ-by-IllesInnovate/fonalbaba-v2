@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "bemutatkozasok",
+  "info": {
+    "singularName": "bemutatkozas",
+    "pluralName": "bemutatkozasok",
+    "displayName": "Bemutatkozas"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "intro": {
+      "type": "string"
+    },
+    "body": {
+      "type": "richtext"
+    },
+    "email": {
+      "type": "email"
+    },
+    "facebookLink": {
+      "type": "string"
+    }
+  }
+}

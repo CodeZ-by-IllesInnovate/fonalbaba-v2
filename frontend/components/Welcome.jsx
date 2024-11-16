@@ -9,6 +9,7 @@ const Welcome = () => {
       disable: "phone",
       duration: 700,
       easing: "ease-out-cubic",
+      once: true,
     });
   }, []);
 
@@ -18,7 +19,7 @@ const Welcome = () => {
     const fetchWelcomeData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:1337/api/welcome?populate=*"
+          `${process.env.NEXT_PUBLIC_STRAPI_URL}/welcome?populate=*`
         );
         const data = await response.json();
         console.log("welcome data", data.data);
@@ -31,7 +32,7 @@ const Welcome = () => {
   }, []);
 
   return (
-    <section className=" relative bg-white py-12 w-full  font-mono">
+    <section className=" relative mt-20 border-b border-accent min-h-[800px] py-12 w-full  font-mono">
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
         <div className="w-full md:w-1/2 pr-4" data-aos="fade-right">
           {welcomeData && (

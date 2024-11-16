@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
-export default function Mintak() {
+const MintakPage = () => {
   const [patterns, setPatterns] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -10,7 +10,7 @@ export default function Mintak() {
     const fetchPatterns = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_STRAPI_URL}/mintaks?sort=createdAt:desc&pagination[limit]=3&populate=*`
+          `${process.env.NEXT_PUBLIC_STRAPI_URL}/mintaks?populate=*`
         );
         const data = await res.json();
         const formattedPatterns = data.data.map((pattern) => ({
@@ -39,7 +39,7 @@ export default function Mintak() {
     <section className="mt-20 font-mono">
       <div className="container mx-auto">
         <h2 className="text-3xl font-bold mb-6 my-8 tracking-wide text-yellow-600">
-          Legújabb minták
+          Minták
         </h2>
         <div className="flex flex-wrap-3 gap-6">
           {patterns.map((pattern) => (
@@ -79,4 +79,6 @@ export default function Mintak() {
       </div>
     </section>
   );
-}
+};
+
+export default MintakPage;

@@ -7,7 +7,7 @@ export default function Amigurumi() {
     const fetchAmigurumiData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:1337/api/amigurumi?populate=*"
+          `${process.env.NEXT_PUBLIC_STRAPI_URL}/amigurumi?populate=*`
         ); // Használj megfelelő API URL-t
         const data = await response.json();
         console.log("amigurumi data", data.data);
@@ -19,7 +19,7 @@ export default function Amigurumi() {
     fetchAmigurumiData();
   }, []);
   return (
-    <div className="relative bg-white py-12 w-full font-mono mt-12">
+    <div className="mt-20 w-full font-mono ">
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
         <div className="w-full md:w-1/2 pr-4">
           <h1 className="text-3xl font-bold text-yellow-600">
